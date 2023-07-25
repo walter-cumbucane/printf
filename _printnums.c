@@ -1,6 +1,5 @@
 #include <unistd.h>
 #include <stdlib.h>
-#include "main.h"
 
 /**
  * _printint - Helper function to print an integer directly to stdout.
@@ -8,34 +7,33 @@
  *
  * Return: The number of characters printed (excluding the null byte).
  */
-
 int _printint(int num)
 {
-	char buffer[20]; /* Assume that 20 characters are enough for an int */
+	char buffer[20]; /*Assume that 20 charaters are enough for an int*/
 	int count = 0;
 	int i = sizeof(buffer) - 1;
 
-	if (num == 0)/* Handle Zero */
+	if (num == 0)/*Handle Zero */
 	{
-		buffer[0] = '0';
-		buffer[1] = '\0';
+		buffer[0] = 48;
+		buffer[1] = 0;
 		count++;
-		_putchar('0');
+		write(1, buffer, 1);
 		return (count);
 	}
-	if (num < 0)/* Handle Negative numbers */
+	if (num < 0)/*Handle Negative numbers */
 	{
-		_putchar('-');
+		write(1, "-", 1);
 		count++;
 		num = -num;
 	}
-	buffer[i--] = '\0';/* Converts the integer to a string (reversed) */
+	buffer[i--] = 0;/*Converts the integer to a string(reversed)*/
 	do {
-		buffer[i--] = '0' + (num % 10);
+		buffer[i--] = 48 + (num % 10);
 		num /= 10;
 		count++;
 	} while (num > 0);
-	_putchar(buffer[i + 1]);/* Write the string to the stdout */
+	write(1, buffer + i + 1, count);/*Write the string to the stdout */
 	return (count);
 }
 
