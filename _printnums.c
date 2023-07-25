@@ -1,40 +1,95 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include "main.h"
 
 /**
  * _printint - Helper function to print an integer directly to stdout.
- * @num: The integer to be printed.
+ * @n: The integer to be printed.
  *
  * Return: The number of characters printed (excluding the null byte).
  */
-int _printint(int num)
+int _printint(int n)
 {
-	char buffer[20]; /*Assume that 20 charaters are enough for an int*/
-	int count = 0;
-	int i = sizeof(buffer) - 1;
+	int num, last = n % 10, digit, exp = 1;
+	int  i = 1;
 
-	if (num == 0)/*Handle Zero */
+	n = n / 10;
+	num = n;
+
+	if (last < 0)
 	{
-		buffer[0] = 48;
-		buffer[1] = 0;
-		count++;
-		write(1, buffer, 1);
-		return (count);
-	}
-	if (num < 0)/*Handle Negative numbers */
-	{
-		write(1, "-", 1);
-		count++;
+		_putchar('-');
 		num = -num;
+		n = -n;
+		last = -last;
+		i++;
 	}
-	buffer[i--] = 0;/*Converts the integer to a string(reversed)*/
-	do {
-		buffer[i--] = 48 + (num % 10);
-		num /= 10;
-		count++;
-	} while (num > 0);
-	write(1, buffer + i + 1, count);/*Write the string to the stdout */
-	return (count);
+	if (num > 0)
+	{
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num = num - (digit * exp);
+			exp = exp / 10;
+			i++;
+		}
+	}
+	_putchar(last + '0');
+
+	return (i);
+}
+
+/**
+ * _printdec - Helper function to print a decimal value directly to stdout.
+ * @n: The integer to be printed.
+ *
+ * Return: The number of characters printed (excluding the null byte).
+ */
+
+int _printdec(int n)
+{
+	int num, last = n % 10, digit;
+	int  i = 1;
+	int exp = 1;
+
+	n = n / 10;
+	num = n;
+
+	if (last < 0)
+	{
+		_putchar('-');
+		num = -num;
+		n = -n;
+		last = -last;
+		i++;
+	}
+	if (num > 0)
+	{
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num = num - (digit * exp);
+			exp = exp / 10;
+			i++;
+		}
+	}
+	_putchar(last + '0');
+
+	return (i);
 }
 
 /**

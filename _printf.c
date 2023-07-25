@@ -26,8 +26,10 @@ int _printf(const char *format, ...)
 				count += _printchar(va_arg(ptr, int));
 			else if (*(format + i) == 's')
 				count += _printstr(va_arg(ptr, char *));
-			else if (*(format + i) == 'd' || *(format + i) == 'i')
+			else if (*(format + i) == 'd')
 				count += _printint(va_arg(ptr, int));
+			else if (*(format + i) == 'i')
+				count += _printdec(va_arg(ptr, int));
 			else if (*(format + i) == 'u')
 				count += _printint(va_arg(ptr, int));
 			else if (*(format + i) == 'b')
