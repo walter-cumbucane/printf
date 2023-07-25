@@ -28,6 +28,12 @@ int _printstr(char *s)
 {
 	int count;
 
+	if (s == NULL)
+	{
+		s = "(null)";
+		count = write(1, s, _strlen(s));
+		return (count);
+	}
 	count = write(1, s, _strlen(s));
 	return (count);
 }
