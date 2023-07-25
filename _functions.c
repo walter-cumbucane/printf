@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * _strlen - Returns the length of a string.
@@ -18,4 +19,16 @@ int _strlen(char *s)
 		i++;
 	}
 	return (len);
+}
+
+/**
+ * _putchar - Helper function to print a single character to stdout.
+ * @c: The character to be printed.
+ *
+ * Return: 1 on success, -1 on error.
+ */
+
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
 }

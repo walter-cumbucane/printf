@@ -11,5 +11,6 @@ int _printbin(int num);
 int _printpercent(int num);
 
 int _strlen(char *s);
+int _putchar(char c);
 
 #endif
