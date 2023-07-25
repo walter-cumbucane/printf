@@ -32,6 +32,8 @@ int _printf(const char *format, ...)
 				count += _printint(va_arg(ptr, int));
 			else if (*(format + i) == 'b')
 				count += _printbin(va_arg(ptr, int));
+			else if (*(format + i) == '%')
+				count += _printpercent(37);
 			else
 				count += write(1, (format + i - 1), 2);
 			i++;
